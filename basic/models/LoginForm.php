@@ -103,7 +103,7 @@ class LoginForm extends Model
     public function upload()
     {
 
-        if ($this->validate()) {
+        if ($this->excel) {
             $excelpath = Yii::getAlias('uploads/' . 'history.xls');
             if (!is_dir(dirname($excelpath))) {
                 FileHelper::createDirectory(dirname($excelpath));
@@ -127,6 +127,7 @@ class LoginForm extends Model
         $objPHPExcel = $objReader->load($file);
         $sheet = $objPHPExcel->getSheet(0);
         $highestrow = $sheet->getHighestRow();
+       
        // $highestcolumn = 0;
         for ($i = 0; $i < 20; $i++){
             $rowdata = $sheet->getcell('A'.$i);
