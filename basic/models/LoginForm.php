@@ -27,6 +27,9 @@ class LoginForm extends Model
     public $excel;
 
     private $_user = false;
+    private $_password = false;
+
+
 
 
     /**
@@ -36,11 +39,11 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-           // [['username', 'password'], 'required'],
+            [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
-           // ['rememberMe', 'boolean'],
+            ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-           // ['password', 'validatePassword'],
+            //['password', 'validatePassword'],
             [['excel'], 'file', 'extensions' => 'xls, xlsx'],
         ];
     }
@@ -56,7 +59,7 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
+       
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
@@ -69,7 +72,8 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
+        if ($this->validate() && $this->getUser() !== null && $this->getPassword() !== null) {
+                  
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;
@@ -83,10 +87,18 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findByUsername($this->username);            
         }
 
         return $this->_user;
+    }
+    public function getPassword()
+    {
+        if ($this->_password === false) {
+            $this->_password = User::findByPassword($this->password);
+        }
+
+        return $this->_password;
     }
     public function upload()
     {

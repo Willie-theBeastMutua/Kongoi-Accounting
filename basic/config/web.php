@@ -11,6 +11,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@app'  => 'C:/Apache24/htdocs/Kongoi-Accounting/basic'
     ],
     'components' => [
         'request' => [

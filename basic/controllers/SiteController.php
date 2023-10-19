@@ -21,6 +21,15 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+            //'access' => [
+              //  'class' => AccessControl::class,
+               // 'rules' => [
+               //     [
+                //        'allow' => true,
+                //       'roles' => ['@']
+                 //   ]
+               // ]
+          //  ],
             'access' => [
                 'class' => AccessControl::class,
                 'only' => ['logout'],
@@ -88,13 +97,18 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goback();
+        }
+        elseif($model->load(Yii::$app->request->post()) && !$model->login()){
+           //$model->addError(null, 'Incorrect username or password.');
+           Yii::$app->session->setFlash('warning', 'Incorrect username or password.');
         }
 
         $model->password = '';

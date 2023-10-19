@@ -112,3 +112,37 @@ a.desc:after {
     border-color: #999;
     padding: 30px;
 }
+.div-sales{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    border: 1px solid;
+    border-color: #999;
+    padding-top: 0%;
+    padding-left: 100px;
+    padding-right: 100px;
+
+}
+.move-right {
+    float: right;
+}
+aside .nav-pills .nav-link:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+aside .nav-pills .nav-link.active {
+    background: rgba(0, 0, 0, 0.05);
+    color: #231276;
+    border-left: 2px solid #231276;
+}
+aside{
+    padding-top: 5%;
+    padding-bottom: 100%;
+    min-width: 200px;
+    margin-right: auto;
+    
+}
+aside .nav-pills .nav-link {
+    border-radius: 0;
+    color: #444444;
+}
