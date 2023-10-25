@@ -2,20 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Sales;
+use app\models\Stock;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use Yii;
-
-
 
 /**
- * SalesController implements the CRUD actions for Sales model.
+ * StockController implements the CRUD actions for Stock model.
  */
-class SalesController extends Controller
+class StockController extends Controller
 {
     /**
      * @inheritDoc
@@ -25,15 +21,6 @@ class SalesController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                'access' => [
-                    'class' => AccessControl::class,
-                    'rules' => [
-                        [
-                            'allow' => true,
-                            'roles' => ['@']
-                        ]
-                   ]
-                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -45,21 +32,21 @@ class SalesController extends Controller
     }
 
     /**
-     * Lists all Sales models.
+     * Lists all Stock models.
      *
      * @return string
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Sales::find(),
+            'query' => Stock::find(),
             /*
             'pagination' => [
                 'pageSize' => 50
             ],
             'sort' => [
                 'defaultOrder' => [
-                    'salesId' => SORT_DESC,
+                    'stockId' => SORT_DESC,
                 ]
             ],
             */
@@ -71,41 +58,33 @@ class SalesController extends Controller
     }
 
     /**
-     * Displays a single Sales model.
-     * @param int $salesId Sales ID
+     * Displays a single Stock model.
+     * @param int $stockId Stock ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($salesId)
+    public function actionView($stockId)
     {
         return $this->render('view', [
-            'model' => $this->findModel($salesId),
+            'model' => $this->findModel($stockId),
         ]);
     }
 
     /**
-     * Creates a new Sales model.
+     * Creates a new Stock model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Sales();
-        // print_r(!$model->hasErrors());
-        // exit;
+        $model = new Stock();
+
         if ($this->request->isPost) {
-            try{
-                if ($model->load($this->request->post()) && $model->save()) {
-                        Yii::$app->session->removeFlash('error');
-                        return $this->redirect(['view', 'salesId' => $model->salesId]);
-                    }
-                
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'stockId' => $model->stockId]);
             }
-            catch (\yii\db\IntegrityException $e) {
-                Yii::$app->session->setFlash('error', 'Stock already exists as sales');
-         } 
-        // else {
-        //     $model->loadDefaultValues();
+        } else {
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -114,18 +93,18 @@ class SalesController extends Controller
     }
 
     /**
-     * Updates an existing Sales model.
+     * Updates an existing Stock model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $salesId Sales ID
+     * @param int $stockId Stock ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($salesId)
+    public function actionUpdate($stockId)
     {
-        $model = $this->findModel($salesId);
+        $model = $this->findModel($stockId);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'salesId' => $model->salesId]);
+            return $this->redirect(['view', 'stockId' => $model->stockId]);
         }
 
         return $this->render('update', [
@@ -134,29 +113,29 @@ class SalesController extends Controller
     }
 
     /**
-     * Deletes an existing Sales model.
+     * Deletes an existing Stock model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $salesId Sales ID
+     * @param int $stockId Stock ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($salesId)
+    public function actionDelete($stockId)
     {
-        $this->findModel($salesId)->delete();
+        $this->findModel($stockId)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Sales model based on its primary key value.
+     * Finds the Stock model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $salesId Sales ID
-     * @return Sales the loaded model
+     * @param int $stockId Stock ID
+     * @return Stock the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($salesId)
+    protected function findModel($stockId)
     {
-        if (($model = Sales::findOne(['salesId' => $salesId])) !== null) {
+        if (($model = Stock::findOne(['stockId' => $stockId])) !== null) {
             return $model;
         }
 

@@ -12,7 +12,6 @@ use Yii;
  * @property int $shopId
  * @property int $sale
  * @property string $Date
- * @property string $salescol
  * @property int $stockId
  *
  * @property Sales $product
@@ -36,13 +35,9 @@ class Sales extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['productId', 'shopId', 'sale', 'Date', 'salescol', 'stockId'], 'required'],
+            [['productId', 'shopId', 'sale', 'Date', 'stockId'], 'required'],
             [['productId', 'shopId', 'sale', 'stockId'], 'integer'],
             [['Date'], 'safe'],
-            [['salescol'], 'string', 'max' => 45],
-            [['productId'], 'exist', 'skipOnError' => true, 'targetClass' => Sales::class, 'targetAttribute' => ['productId' => 'productId']],
-            [['shopId'], 'exist', 'skipOnError' => true, 'targetClass' => Shop::class, 'targetAttribute' => ['shopId' => 'shopId']],
-            [['stockId'], 'exist', 'skipOnError' => true, 'targetClass' => Stock::class, 'targetAttribute' => ['stockId' => 'stockId']],
         ];
     }
 
@@ -53,12 +48,11 @@ class Sales extends \yii\db\ActiveRecord
     {
         return [
             'salesId' => 'Sales ID',
-            'productId' => 'Product ID',
-            'shopId' => 'Shop ID',
-            'sale' => 'Sale',
+            'productId' => 'Product',
+            'shopId' => 'Shop Name',
+            'sale' => 'Selling Price',
             'Date' => 'Date',
-            'salescol' => 'Salescol',
-            'stockId' => 'Stock ID',
+            'stockId' => 'Stock',
         ];
     }
 

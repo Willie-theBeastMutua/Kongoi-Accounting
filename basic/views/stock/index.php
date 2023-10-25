@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Sales;
+use app\models\Stock;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -9,15 +9,15 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Sales';
+$this->title = 'Stocks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sales-index div-salesIndex">
+<div class="stock-index div-salesIndex">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Sales', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Stock', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -28,9 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-        
-
-            //'salesId',
+            'stockId',
             [
                 'attribute' => 'productId',
                 'value' => function ($model) {
@@ -38,53 +36,51 @@ $this->params['breadcrumbs'][] = $this->title;
                     $product = Yii::$app->db->createCommand('SELECT productName FROM products WHERE productId = :productId')
                         ->bindValue(':productId', $model->productId)
                         ->queryScalar();
-                    $statusId = Yii::$app->db->createCommand('SELECT statusId FROM stock where stockId = :stockId')
-                         ->bindValue(':stockId', $model->stockId)
-                         ->queryScalar();
                     return $product;
                 },
+
             ],
             [
-                'attribute' => 'shopId',
+                'attribute' => 'statusId',
                 'value' => function ($model) {
-                    // Custom query to fetch shop name based on shopId
-                    $shop = Yii::$app->db->createCommand('SELECT shopName FROM shop WHERE shopId = :shopId')
-                        ->bindValue(':shopId', $model->shopId)
+                    // Custom query to fetch product name based on productId
+                    $status = Yii::$app->db->createCommand('SELECT statusName FROM status WHERE statusId = :statusId')
+                        ->bindValue(':statusId', $model->statusId)
                         ->queryScalar();
-                    return $shop;
+                    return $status;
                 },
+
             ],
             [
-                'attribute' => 'stock.buyingPrice',
-                'label' => 'Buying Price',
-                // 'value' => function ($model) {
-                    // Custom query to fetch shop name based on shopId
-                    // $shop = Yii::$app->db->createCommand('SELECT shopName FROM shop WHERE shopId = :shopId')
-                    //     ->bindValue(':shopId', $model->shopId)
-                    //     ->queryScalar();
-                    // return $shop;
-                // },
+                'attribute' => 'createdby',
+                'value' => function ($model) {
+                    // Custom query to fetch product name based on productId
+                    $username = Yii::$app->db->createCommand('SELECT userName FROM user WHERE userId = :userId')
+                        ->bindValue(':userId', $model->createdby)
+                        ->queryScalar();
+                    return $username;
+                },
+
             ],
-            'sale',
-            'Date',
-            //'salescol',
-            'stockId',
+            'createDate',
+            'shopId',
+            'buyingPrice',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model) {
-                        return Html::a('<i class="fas fa-eye"></i>', ['view', 'salesId' => $model->salesId], [
+                        return Html::a('<i class="fas fa-eye"></i>', ['view', 'stockId' => $model->stockId], [
                             'title' => 'View',
                         ]);
                     },
                     'update' => function ($url, $model) {
                         // Check your condition here and disable the button if the condition is met
                         // if ($model-> == 1) {
-                            return (isset($this->statusId) && ($this->statusId == 1))? Html::a('<i class="fas fa-edit"></i>', ['update', 'salesId' => $model->salesId], [
+                            return Html::a('<i class="fas fa-edit"></i>', ['update', 'stockId' => $model->stockId], [
                                 // 'title' => 'Update (Disabled)',
                                 // 'class' => 'disabled-link', // Add a class for styling
-                            ]): Html::a('<i class="fas fa-edit" disabled-icon"></i>');
+                            ]);
                         //  else {
                         //     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                         //         'title' => 'Update',

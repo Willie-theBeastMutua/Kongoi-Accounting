@@ -27,15 +27,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="<?= Yii::$app->charset ?>">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title><?= Html::encode($this->title) ?></title>
+    
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
+<div class="flash-messages">
+    <?php foreach (Yii::$app->session->getAllFlashes() as $key => $message) : ?>
+        <div class="alert alert-<?= $key ?>"><?= $message ?></div>
+    <?php endforeach; ?>
+</div>
 
-<div>
+<div class='wrap h-100 d-flex flex-column'>
     <div class='wrap h-100 d-flex flex-column'>
         <?php echo $this->render('_header') ?>
         <?= $content ?>
