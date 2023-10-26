@@ -27,10 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'custom-table table-striped table-bordered zero-configuration',
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-        
+            // ['class' => 'yii\grid\SerialColumn'],      
 
-            //'salesId',
+            'salesId',
             [
                 'attribute' => 'productId',
                 'value' => function ($model) {
@@ -41,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $statusId = Yii::$app->db->createCommand('SELECT statusId FROM stock where stockId = :stockId')
                          ->bindValue(':stockId', $model->stockId)
                          ->queryScalar();
+                         
                     return $product;
                 },
             ],
@@ -57,13 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'stock.buyingPrice',
                 'label' => 'Buying Price',
-                // 'value' => function ($model) {
-                    // Custom query to fetch shop name based on shopId
-                    // $shop = Yii::$app->db->createCommand('SELECT shopName FROM shop WHERE shopId = :shopId')
-                    //     ->bindValue(':shopId', $model->shopId)
-                    //     ->queryScalar();
-                    // return $shop;
-                // },
             ],
             'sale',
             'Date',
@@ -71,30 +64,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'stockId',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete}',
+                'template' => ' {update} {delete}',
+                // {view}
                 'buttons' => [
-                    'view' => function ($url, $model) {
-                        return Html::a('<i class="fas fa-eye"></i>', ['view', 'salesId' => $model->salesId], [
-                            'title' => 'View',
-                        ]);
-                    },
+                    // 'view' => function ($url, $model) {
+                    //     return Html::a('<i class="fas fa-eye"></i>', ['view', 'salesId' => $model->salesId], [
+                    //         'title' => 'View',
+                    //     ]);
+                    // },
                     'update' => function ($url, $model) {
                         // Check your condition here and disable the button if the condition is met
-                        // if ($model-> == 1) {
-                            return (isset($this->statusId) && ($this->statusId == 1))? Html::a('<i class="fas fa-edit"></i>', ['update', 'salesId' => $model->salesId], [
-                                // 'title' => 'Update (Disabled)',
-                                // 'class' => 'disabled-link', // Add a class for styling
-                            ]): Html::a('<i class="fas fa-edit" disabled-icon"></i>');
-                        //  else {
-                        //     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                        //         'title' => 'Update',
-                        //     ]);
-                        // }
+                            $statusId = Yii::$app->db->createCommand('SELECT statusId FROM stock where stockId = :stockId')
+                                ->bindValue(':stockId', $model->stockId)
+                                ->queryScalar();
+                            return (isset($statusId) && ($statusId == 1))? Html::a('<i class="fas fa-edit"></i>', ['update', 'salesId' => $model->salesId], [
+                            ]): Html::a('<i class="fas fa-edit" disabled-icon"></i>');                        
                     },
-                    'delete' => function ($url, $model) {
-                        return Html::a('<i class="fas fa-trash"></i>', ['delete', 'stockId' => $model->stockId]);
+                    // 'delete' => function ($url, $model) {
+                    //     return Html::a('<i class="fas fa-trash"></i>', ['delete', 'stockId' => $model->stockId]);
 
-                    },
+                    // },
                 ],
             ],
         ],

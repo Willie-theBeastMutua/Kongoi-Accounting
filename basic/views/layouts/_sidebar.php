@@ -36,7 +36,19 @@ use yii\helpers\Url;
         [
         'label' => 'View Stock',
         'url' => ['/stock/index'],
-        ]
+        ],
+        [
+            'label' => 'Add products',
+            'url' => ['/products/create'],
+        ],
+        [
+            'label' => 'View Products',
+            'url' => ['/products/index'],
+        ],
+        [
+            'label' => 'Reports',
+            'url' => ['/site/about'],
+        ],
 ]]); 
 ?>
 </aside>

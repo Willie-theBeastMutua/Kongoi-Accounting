@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'custom-table table-striped table-bordered zero-configuration',
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            // ['class' => 'yii\grid\SerialColumn'],
             'stockId',
             [
                 'attribute' => 'productId',
@@ -67,25 +67,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'buyingPrice',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete}',
+                'template' => ' {update} {delete}',
+                // {view}
                 'buttons' => [
-                    'view' => function ($url, $model) {
-                        return Html::a('<i class="fas fa-eye"></i>', ['view', 'stockId' => $model->stockId], [
-                            'title' => 'View',
-                        ]);
-                    },
+                    // 'view' => function ($url, $model) {
+                    //     return Html::a('<i class="fas fa-eye"></i>', ['view', 'stockId' => $model->stockId], [
+                    //         'title' => 'View',
+                    //     ]);
+                    // },
                     'update' => function ($url, $model) {
                         // Check your condition here and disable the button if the condition is met
-                        // if ($model-> == 1) {
                             return Html::a('<i class="fas fa-edit"></i>', ['update', 'stockId' => $model->stockId], [
-                                // 'title' => 'Update (Disabled)',
-                                // 'class' => 'disabled-link', // Add a class for styling
-                            ]);
-                        //  else {
-                        //     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                        //         'title' => 'Update',
-                        //     ]);
-                        // }
+                            ]);                     
                     },
                     'delete' => function ($url, $model) {
                         return Html::a('<i class="fas fa-trash"></i>', ['delete', 'stockId' => $model->stockId]);

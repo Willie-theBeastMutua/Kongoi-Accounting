@@ -4,20 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Stock $model */
+/** @var app\models\products $model */
 
-$this->title = $model->stockId;
-$this->params['breadcrumbs'][] = ['label' => 'Stocks', 'url' => ['index']];
+$this->title = $model->productId;
+$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="stock-view div-sales">
+<div class="products-view div-sales">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'stockId' => $model->stockId], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'stockId' => $model->stockId], [
+        <?= Html::a('Update', ['update', 'productId' => $model->productId], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'productId' => $model->productId], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -29,13 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'stockId',
             'productId',
-            'statusId',
-            'createdby',
-            'createDate',
-            'shopId',
-            'buyingPrice',
+            'productName',
+            // 'deleted',
         ],
     ]) ?>
 

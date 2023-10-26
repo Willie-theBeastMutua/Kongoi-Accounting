@@ -35,11 +35,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <body>
 <?php $this->beginBody() ?>
 
-<div class="flash-messages">
-    <?php foreach (Yii::$app->session->getAllFlashes() as $key => $message) : ?>
-        <div class="alert alert-<?= $key ?>"><?= $message ?></div>
-    <?php endforeach; ?>
-</div>
+
 
 <div class='wrap h-100 d-flex flex-column'>
     <div class='wrap h-100 d-flex flex-column'>
