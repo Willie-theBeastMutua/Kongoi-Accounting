@@ -32,15 +32,20 @@ class SiteController extends Controller
           //  ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout'],
+                'only' => ['logout', 'index'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
-            ],
+                ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [

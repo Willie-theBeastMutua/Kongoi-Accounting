@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->productId, 'url' => ['view', 'productId' => $model->productId]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="products-update">
+<div class="products-update div-sales">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -157,6 +157,38 @@ aside .nav-pills .nav-link.active {
     color: #231276;
     border-left: 2px solid #231276;
 }
+aside .nav-pills .dropdown .dropdown-menu {
+    background: rgba(0, 0, 0, 0.05);
+    color: #000000;
+    border-left: 2px solid #231276;
+        /* display: block; */
+    visibility: visible;
+
+    /* padding-left: 10%; */
+
+}
+
+
+/* Style the active dropdown items in the sub-menu */
+aside .nav-pills .dropdown .dropdown-menu .dropdown-item.active {
+    background: rgba(255, 5, 5, 0.05);
+    color: #231276;
+    border-left: 2px solid #231276;
+    display: block;
+
+}
+
+/* Keep the dropdown menu open when any item in the submenu is active */
+aside .nav-pills .dropdown .show .dropdown-menu {
+    display: block;
+    color: #27f503;
+    padding-left: 10%;
+
+
+}
+aside .nav-pills .dropdown .show .dropdown-menu .dropdown-item:focus {
+    display: block;
+}
 aside{
     padding-top: 5%;
     padding-bottom: 100%;

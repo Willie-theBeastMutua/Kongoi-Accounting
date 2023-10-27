@@ -49,6 +49,25 @@ use yii\helpers\Url;
             'label' => 'Reports',
             'url' => ['/site/about'],
         ],
+        [
+            'label' => 'Calculator',
+            'items' => [
+                [
+                    'label' => 'Upload KCB Statement',
+                    'url' => ['/site/index'],
+                    'active' => Yii::$app->controller->id === 'site' && Yii::$app->controller->action->id === 'index',
+                    'options' => ['class' => 'custom-dropdown'], // Apply the custom class
+
+                ],
+                [
+                    'label' => 'Mpesa Output',
+                    'url' => ['/site/about'],
+                    'active' => Yii::$app->controller->id === 'site' && Yii::$app->controller->action->id === 'about',
+                    'options' => ['class' => 'custom-dropdown'], // Apply the custom class
+
+                ],
+            ],
+        ],
 ]]); 
 ?>
 </aside>

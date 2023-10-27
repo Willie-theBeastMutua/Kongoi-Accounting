@@ -49,6 +49,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                
             ],
         ],
         'assetManager' => [
@@ -61,6 +62,8 @@ $config = [
 
     ],
     'params' => $params,
+    'defaultRoute' => 'sales/create'
+
 ];
 
 if (YII_ENV_DEV) {
